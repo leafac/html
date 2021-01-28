@@ -40,4 +40,5 @@ Use @leafac/html with [Prettier](https://prettier.io) (automatic formatting) & [
 - <https://npm.im/escape-html-template-tag>:
   - Awkward API with `escapeHtml.safe()` and `escapeHtml.join()` instead of the `$${}` trick.
   - [Uses a bespoke encoding](https://github.com/Janpot/escape-html-template-tag/blob/14ab388646b9b930ea68a46b0a9c8314d65b388a/index.mjs#L1-L10).
-- <https://npm.im/lit-html>, <https://npm.im/nanohtml>, <https://npm.im/htm>, and <https://npm.im/viperhtml>: Have the notion of virtual DOM instead of simple strings.
+- <https://npm.im/lit-html>, <https://npm.im/nanohtml>, <https://npm.im/htm>, and <https://npm.im/viperhtml>:
+  - Have the notion of virtual DOM instead of simple strings.
