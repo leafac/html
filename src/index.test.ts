@@ -32,6 +32,10 @@ test("Double encode: Don’t try to prevent it; use safe interpolation instead",
   );
 });
 
+test("Interpolation of non-string/non-array: Convert to string", () => {
+  expect(html`<p>${null}</p>`).toMatchInlineSnapshot(`"<p>null</p>"`);
+});
+
 test("Safe interpolation (use $${...}): Don’t encode", () => {
   expect(
     html`<p>$${`<span>Leandro Facchinetti</span>`}</p>`

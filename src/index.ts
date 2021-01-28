@@ -18,6 +18,7 @@ export default (
     let substitution = substitutions[index];
     if (!Array.isArray(substitution)) substitution = [substitution];
     for (let substitutionPart of substitution) {
+      substitutionPart = String(substitutionPart);
       if (encode) substitutionPart = he.encode(substitutionPart);
       buffer.push(substitutionPart);
     }
