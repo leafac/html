@@ -4,21 +4,16 @@
   "description": "HTML tagged template literals",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/leafac/html.git"
-  },
+  "repository": "leafac/html",
   "keywords": [
     "html",
     "template",
     "tagged template literal",
     "template strings"
   ],
-  "author": "Leandro Facchinetti",
+  "author": "Leandro Facchinetti <html@leafac.com> (https://leafac.com)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/leafac/html/issues"
-  },
+  "bugs": "https://github.com/leafac/html/issues",
   "homepage": "https://github.com/leafac/html#readme",
   "publishConfig": {
     "access": "public"
