@@ -16,14 +16,43 @@ Use @leafac/html with [Prettier](https://prettier.io) (automatic formatting), an
 
 ### Features, Usage, and Examples
 
-See [`src/index.test.ts`](src/index.test.ts).
+- **Use tagged template literals as an HTML template engine.** For example:
 
-**Bonus feature:** [The implementation](src/index.ts) is so short and straightforward that you can inspect it yourself. In particular, note how @leafac/html **doesn’t** encode HTML itself; instead, it relies on [he](https://npm.im/he), which is much more robust and reliable than any bespoke encoding.
+  ```typescript
+  import html from "@leafac/html";
 
-### Anti-Features
+  console.log(html`<p>${"Leandro Facchinetti"}</p>`); // => <p>Leandro Facchinetti</p>
+  ```
 
-- Doesn’t try to format the output. Instead call Prettier programmatically on the output.
-- Generates strings, not any kind of virtual DOM.
+- **Safe by default.** For example:
+
+  ```typescript
+  console.log(html`<p>${`<script>alert(1);</script>`}</p>`); // => <p>&#x3C;script&#x3E;alert(1);&#x3C;/script&#x3E;</p>
+  ```
+
+- **Unsafely interpolate trusted HTML with `$${...}`.** For example:
+
+  ```typescript
+  console.log(html`<p>$${`<span>Leandro Facchinetti</span>`}</p>`); // => <p><span>Leandro Facchinetti</span></p>
+  ```
+
+- **Join interpolated arrays.** For example:
+
+  ```typescript
+  console.log(html`<p>${["Leandro", " ", "Facchinetti"]}</p>`); // => <p>Leandro Facchinetti</p>
+  ```
+
+  Array interpolations are safe by default; if you wish to unsafely interpolate an array of trusted HTML use `$${[...]}`.
+
+- **@leafac/html doesn’t encode HTML itself.** It relies on [he](https://npm.im/he), which is much more robust than any bespoke encoding.
+
+- **@leafac/html doesn’t try to format the output.** If you need pretty HTML, you may call Prettier programmatically on the output.
+
+- **@leafac/html generates strings.** No kind of virtual DOM here.
+
+### Related Projects
+
+- <https://npm.im/@leafac/sqlite>: [better-sqlite3](https://npm.im/better-sqlite3) with tagged template literals.
 
 ### Prior Art
 
