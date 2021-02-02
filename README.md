@@ -12,15 +12,13 @@
 $ npm install @leafac/html
 ```
 
+Use @leafac/html with [Prettier](https://prettier.io) (automatic formatting), and the Visual Studio Code extensions [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) (Prettier support) and [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) (syntax highlighting).
+
 ### Features, Usage, and Examples
 
 See [`src/index.test.ts`](src/index.test.ts).
 
 **Bonus feature:** [The implementation](src/index.ts) is so short and straightforward that you can inspect it yourself. In particular, note how @leafac/html **doesn’t** encode HTML itself; instead, it relies on [he](https://npm.im/he), which is much more robust and reliable than any bespoke encoding.
-
-### Recommendation
-
-Use @leafac/html with [Prettier](https://prettier.io) (automatic formatting) & [the es6-string-html Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) (syntax highlighting).
 
 ### Anti-Features
 
