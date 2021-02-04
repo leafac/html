@@ -53,6 +53,7 @@ Use @leafac/html with [Prettier](https://prettier.io) (automatic formatting), an
 ### Related Projects
 
 - <https://npm.im/@leafac/sqlite>: [better-sqlite3](https://npm.im/better-sqlite3) with tagged template literals.
+- <https://npm.im/@leafac/sqlite-migration>: A lightweight migration system for @leafac/sqlite.
 
 ### Prior Art
 
