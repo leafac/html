@@ -48,7 +48,13 @@ Use @leafac/html with [Prettier](https://prettier.io) (automatic formatting), an
 
 - **@leafac/html doesn’t try to format the output.** If you need pretty HTML, you may call Prettier programmatically on the output.
 
-- **@leafac/html generates strings.** No kind of virtual DOM here.
+- **@leafac/html generates strings.** No kind of virtual DOM here. For readability, the `HTML` type is exported in TypeScript, and you may use it like in the following example:
+
+  ```typescript
+  import { html, HTML } from ".";
+  const name: HTML = html`<p>Leandro Facchinetti</p>`;
+  console.log(name);
+  ```
 
 ### Related Projects
 

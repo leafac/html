@@ -1,9 +1,11 @@
 import he from "he";
 
-export default (
+export default html;
+export type HTML = string;
+export function html(
   template: TemplateStringsArray,
   ...substitutions: any[]
-): string => {
+): string {
   const buffer = new Array<string>();
 
   for (let index = 0; index < template.length - 1; index++) {
@@ -26,4 +28,4 @@ export default (
   buffer.push(template[template.length - 1]);
 
   return buffer.join("");
-};
+}
