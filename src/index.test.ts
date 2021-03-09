@@ -88,7 +88,7 @@ test("Array safe interpolation (use $${...}): Don’t encode", () => {
   `);
 });
 
-test("Invalid XML characters: Remove them with sanitize-xml-string", () => {
+test("Invalid XML characters: Remove them with sanitizeXMLString.sanitize()", () => {
   expect(
     // prettier-ignore
     html`<p>Invalid character (backspace): |💩| |\b| ${"|\b|"} $${"|\b|"} ${["|\b|"]} $${["|\b|"]} |\b| |💩|</p>`
