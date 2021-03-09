@@ -13,7 +13,7 @@ test("Simple interpolation: Same as untagged template literals", () => {
   );
 });
 
-test("Unsafe interpolation: Default is to encode with he.encode()", () => {
+test("Unsafe interpolation: Encode with he.encode()", () => {
   expect(html`<p>${`<script>alert(1);</script>`}</p>`).toMatchInlineSnapshot(
     `"<p>&#x3C;script&#x3E;alert(1);&#x3C;/script&#x3E;</p>"`
   );
@@ -56,7 +56,7 @@ test("Array interpolation: Join", () => {
   );
 });
 
-test("Array unsafe interpolation: Default is to encode with he.encode()", () => {
+test("Array unsafe interpolation: Encode with he.encode()", () => {
   expect(
     html`
       <p>
@@ -86,4 +86,13 @@ test("Array safe interpolation (use $${...}): Don’t encode", () => {
           </ul>
         "
   `);
+});
+
+test("Invalid XML characters: Remove them with sanitize-xml-string", () => {
+  expect(
+    // prettier-ignore
+    html`<p>Invalid character (backspace): |💩| |\b| ${"|\b|"} $${"|\b|"} ${["|\b|"]} $${["|\b|"]} |\b| |💩|</p>`
+  ).toMatchInlineSnapshot(
+    `"<p>Invalid character (backspace): |💩| || || || || || || |💩|</p>"`
+  );
 });
