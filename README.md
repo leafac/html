@@ -56,6 +56,13 @@ Use @leafac/html with [Prettier](https://prettier.io) (automatic formatting), an
   console.log(name);
   ```
 
+- **@leafac/html sanitizes (removes) invalid XML characters.** It uses [sanitize-xml-string](https://npm.im/sanitize-xml-string). For example:
+
+  <!-- prettier-ignore -->
+  ```typescript
+  console.log(html`<p>A backspace is invalid in XML: |\b|</p>`); // => <p>A backspace is invalid in XML: ||</p>
+  ```
+
 ### Related Projects
 
 - <https://npm.im/@leafac/sqlite>: [better-sqlite3](https://npm.im/better-sqlite3) with tagged template literals.

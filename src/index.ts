@@ -13,8 +13,8 @@ export function html(
     let templatePart = sanitizeXMLCharacters.sanitize(template[index]);
     let shouldEncode = true;
     if (templatePart.endsWith("$")) {
-      templatePart = templatePart.slice(0, -1);
       shouldEncode = false;
+      templatePart = templatePart.slice(0, -1);
     }
     buffer.push(templatePart);
     let substitution = substitutions[index];
