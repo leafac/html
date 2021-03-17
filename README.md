@@ -60,7 +60,7 @@ Use @leafac/html with [Prettier](https://prettier.io) (automatic formatting), an
 
   <!-- prettier-ignore -->
   ```typescript
-  console.log(html`<p>A backspace is invalid in XML: |\b|</p>`); // => <p>A backspace is invalid in XML: ||</p>
+  console.log(html`<p>A backspace is invalid in XML: |${"\b"}|</p>`); // => <p>A backspace is invalid in XML: ||</p>
   ```
 
 ### Related Projects

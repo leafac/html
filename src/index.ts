@@ -7,27 +7,30 @@ export function html(
   template: TemplateStringsArray,
   ...substitutions: any[]
 ): string {
+  const templatePartsSanitized = template.raw.map((templatePart) =>
+    sanitizeXMLCharacters.sanitize(templatePart)
+  );
+  const substitutionsSanitized = [
+    ...substitutions.map((substitution) =>
+      (Array.isArray(substitution)
+        ? substitution
+        : [substitution]
+      ).map((substitutionPart) =>
+        sanitizeXMLCharacters.sanitize(String(substitutionPart))
+      )
+    ),
+    [],
+  ];
   const buffer = new Array<string>();
-
-  for (let index = 0; index < template.length - 1; index++) {
-    let templatePart = sanitizeXMLCharacters.sanitize(template[index]);
-    let shouldEncode = true;
-    if (templatePart.endsWith("$")) {
-      shouldEncode = false;
-      templatePart = templatePart.slice(0, -1);
-    }
-    buffer.push(templatePart);
-    let substitution = substitutions[index];
-    if (!Array.isArray(substitution)) substitution = [substitution];
-    for (let substitutionPart of substitution) {
-      substitutionPart = sanitizeXMLCharacters.sanitize(
-        String(substitutionPart)
+  for (const index of templatePartsSanitized.keys()) {
+    let templatePart = templatePartsSanitized[index];
+    let substitution = substitutionsSanitized[index];
+    if (templatePart.endsWith("$")) templatePart = templatePart.slice(0, -1);
+    else
+      substitution = substitution.map((substitutionPart) =>
+        he.encode(substitutionPart)
       );
-      if (shouldEncode) substitutionPart = he.encode(substitutionPart);
-      buffer.push(substitutionPart);
-    }
+    buffer.push(templatePart, ...substitution);
   }
-  buffer.push(sanitizeXMLCharacters.sanitize(template[template.length - 1]));
-
   return buffer.join("");
 }

@@ -88,11 +88,20 @@ test("Array safe interpolation (use $${...}): Don’t encode", () => {
   `);
 });
 
-test("Invalid XML characters: Remove them with sanitizeXMLString.sanitize()", () => {
+test("Invalid XML characters: Remove them from substitutions with sanitizeXMLString.sanitize() (literals in the source are preserved because of the principle of least surprise)", () => {
   expect(
     // prettier-ignore
     html`<p>Invalid character (backspace): |💩| |\b| ${"|\b|"} $${"|\b|"} ${["|\b|"]} $${["|\b|"]} |\b| |💩|</p>`
   ).toMatchInlineSnapshot(
-    `"<p>Invalid character (backspace): |💩| || || || || || || |💩|</p>"`
+    `"<p>Invalid character (backspace): |💩| |\\\\b| || || || || |\\\\b| |💩|</p>"`
+  );
+});
+
+test("Escape sequences: Ignored because of the principle of least surprise", () => {
+  expect(
+    // prettier-ignore
+    html`<input type="text" required pattern=".*\S.*" />`
+  ).toMatchInlineSnapshot(
+    `"<input type=\\"text\\" required pattern=\\".*\\\\S.*\\" />"`
   );
 });
