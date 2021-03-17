@@ -1,6 +1,6 @@
 {
   "name": "@leafac/html",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "HTML tagged template literals",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
