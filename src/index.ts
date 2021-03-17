@@ -7,7 +7,7 @@ export function html(
   template: TemplateStringsArray,
   ...substitutions: any[]
 ): string {
-  const templatePartsSanitized = template.raw.map((templatePart) =>
+  const templatePartsSanitized = template.map((templatePart) =>
     sanitizeXMLCharacters.sanitize(templatePart)
   );
   const substitutionsSanitized = [
