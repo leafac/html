@@ -6,7 +6,7 @@ export type HTML = string;
 export function html(
   template: TemplateStringsArray,
   ...substitutions: any[]
-): string {
+): HTML {
   const templatePartsSanitized = template.map((templatePart) =>
     sanitizeXMLCharacters.sanitize(templatePart)
   );
