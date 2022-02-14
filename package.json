@@ -1,6 +1,6 @@
 {
   "name": "@leafac/html",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Radically Straightforward HTML",
   "exports": "./distribution/index.js",
   "types": "./distribution/index.d.ts",
