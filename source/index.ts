@@ -6,7 +6,7 @@ export default html;
 export type HTML = string;
 export function html(
   template: TemplateStringsArray,
-  ...substitutions: any[]
+  ...substitutions: (string | string[])[]
 ): HTML {
   const templatePartsSanitized = template.map((templatePart) =>
     sanitizeXMLCharacters.sanitize(templatePart)
@@ -51,7 +51,6 @@ if (process.env.TEST === "leafac--html") {
     html`<p>$${html`${`<script>alert(1);</script>`}`}</p>`,
     `<p>&#x3C;script&#x3E;alert(1);&#x3C;/script&#x3E;</p>`
   );
-  assert.equal(html`<p>${null}</p>`, `<p>null</p>`);
   assert.equal(
     html`<p>$${`<span>Leandro Facchinetti</span>`}</p>`,
     `<p><span>Leandro Facchinetti</span></p>`
