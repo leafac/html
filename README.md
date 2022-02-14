@@ -1,3 +1,7 @@
+<!-- 
+- [ ] Food for thought: All these designs allow me to mark a string as safe for inclusion in HTML right as I’m interpolating it; but none of them seem to give me the option to mark a good old string as safe for inclusion, so that its safeness becomes a property of the string itself (which is Rails’s design, as far as I can remember)
+-->
+
 <h1 align="center">@leafac/html</h1>
 <h3 align="center">HTML <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">tagged template literals</a></h3>
 <p align="center">

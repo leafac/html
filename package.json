@@ -1,9 +1,9 @@
 {
   "name": "@leafac/html",
   "version": "3.0.0",
-  "description": "HTML tagged template literals",
-  "main": "distribution/index.js",
-  "types": "distribution/index.d.ts",
+  "description": "Radically Straightforward HTML",
+  "exports": "./distribution/index.js",
+  "types": "./distribution/index.d.ts",
   "repository": "leafac/html",
   "keywords": [
     "html",
@@ -15,11 +15,17 @@
   "license": "MIT",
   "bugs": "https://github.com/leafac/html/issues",
   "homepage": "https://github.com/leafac/html#readme",
+  "funding": [
+    "https://patreon.com/leafac",
+    "https://paypal.me/LeandroFacchinettiEU",
+    "https://github.com/sponsors/leafac"
+  ],
   "publishConfig": {
     "access": "public"
   },
+  "type": "module",
   "scripts": {
-    "test": "prettier --check \"source/**/*\" --end-of-line auto && jest",
+    "test": "prettier --check \"source/**/*\" --end-of-line auto && npm run prepare && cross-env TEST=leafac--html node ./distribution/index.js",
     "prepare": "tsc"
   },
   "dependencies": {
@@ -27,16 +33,10 @@
     "sanitize-xml-string": "^1.1.0"
   },
   "devDependencies": {
-    "@types/he": "^1.1.1",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^14.14.22",
-    "jest": "^27.1.0",
-    "prettier": "^2.2.1",
-    "ts-jest": "^27.0.5",
-    "typescript": "^4.1.3"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "rootDir": "source"
+    "@types/he": "^1.1.2",
+    "@types/node": "^17.0.17",
+    "cross-env": "^7.0.3",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.5"
   }
 }
