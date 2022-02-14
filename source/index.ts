@@ -13,11 +13,9 @@ export function html(
   );
   const substitutionsSanitized = [
     ...substitutions.map((substitution) =>
-      (Array.isArray(substitution)
-        ? substitution
-        : [substitution]
-      ).map((substitutionPart) =>
-        sanitizeXMLCharacters.sanitize(String(substitutionPart))
+      (Array.isArray(substitution) ? substitution : [substitution]).map(
+        (substitutionPart) =>
+          sanitizeXMLCharacters.sanitize(String(substitutionPart))
       )
     ),
     [],
@@ -88,7 +86,7 @@ if (process.env.TEST === "leafac--html") {
       <ul>
         <li>Leandro</li><li>Facchinetti</li>
       </ul>
-  `
+    `
   );
   assert.equal(
     // prettier-ignore
