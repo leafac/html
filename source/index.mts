@@ -33,6 +33,7 @@ export function html(
   }
   return buffer.join("");
 }
+
 if (process.env.TEST === "leafac--html") {
   assert.equal(html`<p>Leandro Facchinetti</p>`, `<p>Leandro Facchinetti</p>`);
   assert.equal(
