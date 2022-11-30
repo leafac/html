@@ -1,4 +1,4 @@
-<!-- 
+<!--
 - [ ] Food for thought: All these designs allow me to mark a string as safe for inclusion in HTML right as I’m interpolating it; but none of them seem to give me the option to mark a good old string as safe for inclusion, so that its safeness becomes a property of the string itself (which is Rails’s design, as far as I can remember)
 - I tested this against `ReactDOMServer.renderToStaticMarkup()` and it’s twice as fast!
 
@@ -44,13 +44,13 @@ console.log(`React: ${Date.now() - before}ms`);
 <a href="https://github.com/leafac/html/actions"><img src="https://github.com/leafac/html/workflows/.github/workflows/main.yml/badge.svg" alt="Continuous Integration"></a>
 </p>
 
-### Videos
+## Videos
 
 [<img src="https://img.youtube.com/vi/em3x-HbtCag/0.jpg" width="200" /><br />Demonstration](https://youtu.be/em3x-HbtCag)
 
 [<img src="https://img.youtube.com/vi/UPNNLrXlnfw/0.jpg" width="200" /><br />Code Review](https://youtu.be/UPNNLrXlnfw)
 
-### Installation
+## Installation
 
 ```console
 $ npm install @leafac/html
@@ -58,7 +58,7 @@ $ npm install @leafac/html
 
 Use @leafac/html with [Prettier](https://prettier.io) (automatic formatting), and the Visual Studio Code extensions [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) (Prettier support) and [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) (syntax highlighting).
 
-### Features, Usage, and Examples
+## Features, Usage, and Examples
 
 - **Use tagged template literals as an HTML template engine.** For example:
 
@@ -107,12 +107,12 @@ Use @leafac/html with [Prettier](https://prettier.io) (automatic formatting), an
   console.log(html`<p>A backspace is invalid in XML: |\b|</p>`); // => <p>A backspace is invalid in XML: ||</p>
   ```
 
-### Related Projects
+## Related Projects
 
 - <https://npm.im/@leafac/sqlite>: [better-sqlite3](https://npm.im/better-sqlite3) with tagged template literals.
 - <https://npm.im/@leafac/sqlite-migration>: A lightweight migration system for @leafac/sqlite.
 
-### Prior Art
+## Prior Art
 
 - <https://npm.im/html-template-tag>:
   - Was a major inspiration for this. Its design is simple and great. In particular, I love (and stole) the idea of using `$${...}` to mark safe interpolation.
@@ -127,3 +127,7 @@ Use @leafac/html with [Prettier](https://prettier.io) (automatic formatting), an
   - [Uses a bespoke encoding](https://github.com/Janpot/escape-html-template-tag/blob/14ab388646b9b930ea68a46b0a9c8314d65b388a/index.mjs#L1-L10).
 - <https://npm.im/lit-html>, <https://npm.im/nanohtml>, <https://npm.im/htm>, and <https://npm.im/viperhtml>:
   - Have the notion of virtual DOM instead of simple strings.
+
+## Changelog
+
+- Breaking change. Use default import instead of named import.
