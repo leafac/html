@@ -5,33 +5,32 @@ import assert from "node:assert/strict";
 export type HTML = string;
 
 export default function html(
-  template: TemplateStringsArray,
+  templateStrings: TemplateStringsArray,
   ...substitutions: (string | string[])[]
 ): HTML {
-  const templatePartsSanitized = template.map((templatePart) =>
-    sanitizeXMLCharacters.sanitize(templatePart)
-  );
-  const substitutionsSanitized = [
-    ...substitutions.map((substitution) =>
-      (Array.isArray(substitution) ? substitution : [substitution]).map(
-        (substitutionPart) =>
-          sanitizeXMLCharacters.sanitize(String(substitutionPart))
-      )
-    ),
-    [],
-  ];
-  const buffer = new Array<string>();
-  for (const index of templatePartsSanitized.keys()) {
-    let templatePart = templatePartsSanitized[index];
-    let substitution = substitutionsSanitized[index];
-    if (templatePart.endsWith("$")) templatePart = templatePart.slice(0, -1);
-    else
-      substitution = substitution.map((substitutionPart) =>
-        he.encode(substitutionPart)
-      );
-    buffer.push(templatePart, ...substitution);
+  let result = "";
+
+  for (const index of substitutions.keys()) {
+    let templateString = templateStrings[index];
+    const unsafeSubstitution = templateString.endsWith("$");
+    result += unsafeSubstitution ? templateString.slice(0, -1) : templateString;
+
+    const substitution = substitutions[index];
+    if (Array.isArray(substitution)) {
+      if (unsafeSubstitution)
+        for (const substitutionPart of substitution) result += substitutionPart;
+      else
+        for (const substitutionPart of substitution)
+          result += he.encode(sanitizeXMLCharacters.sanitize(substitutionPart));
+    } else {
+      if (unsafeSubstitution) result += substitution;
+      else result += he.encode(sanitizeXMLCharacters.sanitize(substitution));
+    }
   }
-  return buffer.join("");
+
+  result += templateStrings[templateStrings.length - 1];
+
+  return result;
 }
 
 if (process.env.TEST === "leafac--html") {
@@ -91,6 +90,6 @@ if (process.env.TEST === "leafac--html") {
   assert.equal(
     // prettier-ignore
     html`<p>Invalid character (backspace): |💩| |\b| ${"|\b|"} $${"|\b|"} ${["|\b|"]} $${["|\b|"]} |\b| |💩|</p>`,
-    `<p>Invalid character (backspace): |💩| || || || || || || |💩|</p>`
+    `<p>Invalid character (backspace): |💩| |\b| || |\b| || |\b| |\b| |💩|</p>`
   );
 }
