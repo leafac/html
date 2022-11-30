@@ -4,8 +4,7 @@ import assert from "node:assert/strict";
 
 export type HTML = string;
 
-export default html;
-export function html(
+export default function html(
   template: TemplateStringsArray,
   ...substitutions: (string | string[])[]
 ): HTML {
