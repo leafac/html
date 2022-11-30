@@ -2,8 +2,9 @@ import he from "he";
 import * as sanitizeXMLCharacters from "sanitize-xml-string";
 import assert from "node:assert/strict";
 
-export default html;
 export type HTML = string;
+
+export default html;
 export function html(
   template: TemplateStringsArray,
   ...substitutions: (string | string[])[]
