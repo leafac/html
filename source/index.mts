@@ -8,29 +8,29 @@ export default function html(
   templateStrings: TemplateStringsArray,
   ...substitutions: (string | string[])[]
 ): HTML {
-  let result = "";
+  let output = "";
 
   for (const index of substitutions.keys()) {
-    let templateString = templateStrings[index];
+    const templateString = templateStrings[index];
     const unsafeSubstitution = templateString.endsWith("$");
-    result += unsafeSubstitution ? templateString.slice(0, -1) : templateString;
+    output += unsafeSubstitution ? templateString.slice(0, -1) : templateString;
 
     const substitution = substitutions[index];
     if (Array.isArray(substitution)) {
       if (unsafeSubstitution)
-        for (const substitutionPart of substitution) result += substitutionPart;
+        for (const substitutionPart of substitution) output += substitutionPart;
       else
         for (const substitutionPart of substitution)
-          result += he.encode(sanitizeXMLCharacters.sanitize(substitutionPart));
+          output += he.encode(sanitizeXMLCharacters.sanitize(substitutionPart));
     } else {
-      if (unsafeSubstitution) result += substitution;
-      else result += he.encode(sanitizeXMLCharacters.sanitize(substitution));
+      if (unsafeSubstitution) output += substitution;
+      else output += he.encode(sanitizeXMLCharacters.sanitize(substitution));
     }
   }
 
-  result += templateStrings[templateStrings.length - 1];
+  output += templateStrings[templateStrings.length - 1];
 
-  return result;
+  return output;
 }
 
 if (process.env.TEST === "leafac--html") {
