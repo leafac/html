@@ -93,3 +93,7 @@ if (process.env.TEST === "leafac--html") {
     `<p>Invalid character (backspace): |💩| |\b| || |\b| || |\b| |\b| |💩|</p>`
   );
 }
+
+if (process.env.TEST === "leafac--html--benchmark") {
+  
+}
