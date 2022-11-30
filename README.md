@@ -1,5 +1,11 @@
 <!--
-- [ ] Food for thought: All these designs allow me to mark a string as safe for inclusion in HTML right as I’m interpolating it; but none of them seem to give me the option to mark a good old string as safe for inclusion, so that its safeness becomes a property of the string itself (which is Rails’s design, as far as I can remember)
+- Currently, whether a substitution is safe is determined by the context (`${...}` vs `$${...}`). Consider introducing a notion of marking a substitution as safe and bypassing escaping.
+  - You can’t add custom properties to native values like strings, so it would have to be a wrapper, for example:
+    ```javascript
+    const example = new String("hello");
+    example.htmlSafe = true;
+  ```
+  - As far as I remember, this is Ruby on Rail’s design.
 - I tested this against `ReactDOMServer.renderToStaticMarkup()` and it’s twice as fast!
 
 
