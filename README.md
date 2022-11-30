@@ -6,40 +6,7 @@
     example.htmlSafe = true;
   ```
   - As far as I remember, this is Ruby on Rail’s design.
-- I tested this against `ReactDOMServer.renderToStaticMarkup()` and it’s twice as fast!
-
-
-@leafac/html: 1199ms
-React: 2487ms
-
-import { html } from "@leafac/html";
-import React from "react";
-import ReactDOMServer from "react-dom/server.js";
-
-let before;
-const iterations = 1_000_000;
-
-const leafac_HTML = () =>
-  html`
-    <a href="${`https://leafac.com`}">
-      $${html`<strong>${"Hello World"}</strong>`}
-    </a>
-  `;
-console.log(leafac_HTML());
-before = Date.now();
-for (let i = 0; i < iterations; i++) leafac_HTML();
-console.log(`@leafac/html: ${Date.now() - before}ms`);
-
-const react = () =>
-  ReactDOMServer.renderToStaticMarkup(
-    <a href={`https://leafac.com`}>{<strong>{"Hello World"}</strong>}</a>
-  );
-console.log(react());
-before = Date.now();
-for (let i = 0; i < iterations; i++) react();
-console.log(`React: ${Date.now() - before}ms`);
-
-
+- Approximately 3x faster than `ReactDOMServer.renderToStaticMarkup()` (test for yourself with `npm run test:benchmark`)
 -->
 
 <h1 align="center">@leafac/html</h1>

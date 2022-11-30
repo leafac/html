@@ -95,5 +95,37 @@ if (process.env.TEST === "leafac--html") {
 }
 
 if (process.env.TEST === "leafac--html--benchmark") {
-  
+  const iterations = 1_000_000;
+
+  await (async () => {
+    const time = process.hrtime.bigint();
+    for (let iteration = 0; iteration < iterations; iteration++)
+      html`
+        <a href="${`https://leafac.com`}">
+          $${html`<strong>${"Hello World"}</strong>`}
+        </a>
+      `;
+    console.log(
+      `@leafac/html: ${(process.hrtime.bigint() - time) / 1_000_000n}ms`
+    );
+  })();
+
+  await (async () => {
+    const React = (await import("react")).default;
+    const ReactDOMServer = await import("react-dom/server");
+    const time = process.hrtime.bigint();
+    for (let iteration = 0; iteration < iterations; iteration++)
+      ReactDOMServer.renderToStaticMarkup(
+        React.createElement(
+          "a",
+          { href: `https://leafac.com` },
+          React.createElement("strong", null, "Hello World")
+        )
+      );
+    console.log(
+      `ReactDOMServer.renderToStaticMarkup(): ${
+        (process.hrtime.bigint() - time) / 1_000_000n
+      }ms`
+    );
+  })();
 }
