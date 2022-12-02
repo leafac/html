@@ -107,3 +107,4 @@ Use @leafac/html with [Prettier](https://prettier.io) (automatic formatting), an
   - Use default import instead of named import.
   - No longer sanitizing XML characters in the `template` part of the template literal, or in the unsafe substitutions. This improves performance, but you must make sure that you don’t include invalid XML characters in your `template` ([Prettier](https://prettier.io) can help with that) and only do unsafe substitutions with the result of using the `html` template literal (or call `sanitizeXMLCharacters.sanitize()`). Safe (default) substitutions are still interpolated.
     - Avoids sanitizing the same same XML characters over and over.
+- 2x speedup with respect to 3.0.3.

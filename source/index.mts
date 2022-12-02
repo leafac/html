@@ -95,7 +95,7 @@ if (process.env.TEST === "leafac--html") {
 }
 
 if (process.env.TEST === "leafac--html--benchmark") {
-  const iterations = 1_000_000;
+  const iterations = 5_000_000;
 
   await (async () => {
     const time = process.hrtime.bigint();
