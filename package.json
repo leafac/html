@@ -26,8 +26,8 @@
   "types": "./build/index.d.mts",
   "scripts": {
     "prepare": "tsc",
-    "test": "prettier --check \"source/**/*.mts\" --end-of-line auto && npm run prepare && cross-env TEST=leafac--html node ./build/index.mjs",
-    "test:benchmark": "npm run prepare && cross-env TEST=leafac--html--benchmark node ./build/index.mjs"
+    "test": "prettier --check \"./README.md\" --check \"./package.json\" --check \"./source/**/*.mts\" --end-of-line auto && npm run prepare && cross-env TEST=@leafac/html node ./build/index.mjs",
+    "test:benchmark": "npm run prepare && cross-env TEST=@leafac/html/benchmark node ./build/index.mjs"
   },
   "dependencies": {
     "he": "^1.2.0",

@@ -33,7 +33,7 @@ export default function html(
   return output;
 }
 
-if (process.env.TEST === "leafac--html") {
+if (process.env.TEST === "@leafac/html") {
   assert.equal(html`<p>Leandro Facchinetti</p>`, `<p>Leandro Facchinetti</p>`);
   assert.equal(
     html`<p>${"Leandro Facchinetti"}</p>`,
@@ -94,7 +94,7 @@ if (process.env.TEST === "leafac--html") {
   );
 }
 
-if (process.env.TEST === "leafac--html--benchmark") {
+if (process.env.TEST === "@leafac/html/benchmark") {
   const iterations = 5_000_000;
 
   await (async () => {
