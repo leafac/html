@@ -4,9 +4,7 @@
   "description": "Radically Straightforward HTML",
   "keywords": [
     "html",
-    "template",
-    "tagged template literal",
-    "template strings"
+    "tagged template"
   ],
   "homepage": "https://github.com/leafac/html",
   "repository": "https://github.com/leafac/html",
