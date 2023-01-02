@@ -37,7 +37,7 @@ We recommend using @leafac/html along with the following tools:
 
 ## Features, Usage, and Examples
 
-**Use [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates) as an HTML template engine.** For example:
+**Use [tagged templates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates) as an HTML template engine.** For example:
 
 ```typescript
 import html from "@leafac/html";
