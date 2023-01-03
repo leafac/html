@@ -95,25 +95,21 @@ if (process.env.TEST === "@leafac/html") {
 }
 
 if (process.env.TEST === "@leafac/html/benchmark") {
+  const node = await import("@leafac/node");
   const iterations = 5_000_000;
 
-  await (async () => {
-    const time = process.hrtime.bigint();
+  node.time("@leafac/html", async () => {
     for (let iteration = 0; iteration < iterations; iteration++)
       html`
         <a href="${`https://leafac.com`}">
           $${html`<strong>${"Hello World"}</strong>`}
         </a>
       `;
-    console.log(
-      `@leafac/html: ${(process.hrtime.bigint() - time) / 1_000_000n}ms`
-    );
-  })();
+  });
 
-  await (async () => {
-    const React = (await import("react")).default;
-    const ReactDOMServer = await import("react-dom/server");
-    const time = process.hrtime.bigint();
+  const React = (await import("react")).default;
+  const ReactDOMServer = await import("react-dom/server");
+  node.time("ReactDOMServer.renderToStaticMarkup()", async () => {
     for (let iteration = 0; iteration < iterations; iteration++)
       ReactDOMServer.renderToStaticMarkup(
         React.createElement(
@@ -122,10 +118,5 @@ if (process.env.TEST === "@leafac/html/benchmark") {
           React.createElement("strong", null, "Hello World")
         )
       );
-    console.log(
-      `ReactDOMServer.renderToStaticMarkup(): ${
-        (process.hrtime.bigint() - time) / 1_000_000n
-      }ms`
-    );
-  })();
+  });
 }
