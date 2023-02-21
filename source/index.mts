@@ -1,5 +1,5 @@
-import he from "he";
 import * as sanitizeXMLCharacters from "sanitize-xml-string";
+import * as entities from "entities/lib/escape.js";
 import assert from "node:assert/strict";
 
 export type HTML = string;
@@ -21,10 +21,15 @@ export default function html(
         for (const substitutionPart of substitution) output += substitutionPart;
       else
         for (const substitutionPart of substitution)
-          output += he.encode(sanitizeXMLCharacters.sanitize(substitutionPart));
+          output += entities.escapeUTF8(
+            sanitizeXMLCharacters.sanitize(substitutionPart)
+          );
     } else {
       if (unsafeSubstitution) output += substitution;
-      else output += he.encode(sanitizeXMLCharacters.sanitize(substitution));
+      else
+        output += entities.escapeUTF8(
+          sanitizeXMLCharacters.sanitize(substitution)
+        );
     }
   }
 
@@ -41,15 +46,15 @@ if (process.env.TEST === "@leafac/html") {
   );
   assert.equal(
     html`<p>${`<script>alert(1);</script>`}</p>`,
-    `<p>&#x3C;script&#x3E;alert(1);&#x3C;/script&#x3E;</p>`
+    `<p>&lt;script&gt;alert(1);&lt;/script&gt;</p>`
   );
   assert.equal(
     html`<p>${html`${`<script>alert(1);</script>`}`}</p>`,
-    `<p>&#x26;#x3C;script&#x26;#x3E;alert(1);&#x26;#x3C;/script&#x26;#x3E;</p>`
+    `<p>&amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;</p>`
   );
   assert.equal(
     html`<p>$${html`${`<script>alert(1);</script>`}`}</p>`,
-    `<p>&#x3C;script&#x3E;alert(1);&#x3C;/script&#x3E;</p>`
+    `<p>&lt;script&gt;alert(1);&lt;/script&gt;</p>`
   );
   assert.equal(
     html`<p>$${`<span>Leandro Facchinetti</span>`}</p>`,
@@ -57,7 +62,7 @@ if (process.env.TEST === "@leafac/html") {
   );
   assert.equal(
     html`<p>${html`${"$"}${`<script>alert(1);</script>`}`}</p>`,
-    `<p>$&#x26;#x3C;script&#x26;#x3E;alert(1);&#x26;#x3C;/script&#x26;#x3E;</p>`
+    `<p>$&amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;</p>`
   );
   assert.equal(
     html`<p>${["Leandro", " ", "Facchinetti"]}</p>`,
@@ -71,7 +76,7 @@ if (process.env.TEST === "@leafac/html") {
     `,
     `
       <p>
-        Leandro &#x3C;script&#x3E;alert(1);&#x3C;/script&#x3E; Facchinetti
+        Leandro &lt;script&gt;alert(1);&lt;/script&gt; Facchinetti
       </p>
     `
   );
