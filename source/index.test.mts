@@ -6,34 +6,42 @@ import html from "./index.mjs";
 
 test("html``", () => {
   assert.equal(html`<p>Leandro Facchinetti</p>`, `<p>Leandro Facchinetti</p>`);
+
   assert.equal(
     html`<p>${"Leandro Facchinetti"}</p>`,
     `<p>Leandro Facchinetti</p>`
   );
+
   assert.equal(
     html`<p>${`<script>alert(1);</script>`}</p>`,
     `<p>&lt;script&gt;alert(1);&lt;/script&gt;</p>`
   );
+
   assert.equal(
     html`<p>${html`${`<script>alert(1);</script>`}`}</p>`,
     `<p>&amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;</p>`
   );
+
   assert.equal(
     html`<p>$${html`${`<script>alert(1);</script>`}`}</p>`,
     `<p>&lt;script&gt;alert(1);&lt;/script&gt;</p>`
   );
+
   assert.equal(
     html`<p>$${`<span>Leandro Facchinetti</span>`}</p>`,
     `<p><span>Leandro Facchinetti</span></p>`
   );
+
   assert.equal(
     html`<p>${html`${"$"}${`<script>alert(1);</script>`}`}</p>`,
     `<p>$&amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;</p>`
   );
+
   assert.equal(
     html`<p>${["Leandro", " ", "Facchinetti"]}</p>`,
     `<p>Leandro Facchinetti</p>`
   );
+
   assert.equal(
     html`
       <p>
@@ -46,6 +54,7 @@ test("html``", () => {
       </p>
     `
   );
+
   assert.equal(
     html`
       <ul>
@@ -58,6 +67,7 @@ test("html``", () => {
       </ul>
     `
   );
+
   assert.equal(
     // prettier-ignore
     html`<p>Invalid character (backspace): |💩| |\b| ${"|\b|"} $${"|\b|"} ${["|\b|"]} $${["|\b|"]} |\b| |💩|</p>`,
