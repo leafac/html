@@ -113,6 +113,7 @@ console.log(html`<p>A backspace is invalid in XML: ${`|\b|`}</p>`); // => <p>A b
 
 - Now it’s possible to import @leafac/html in the browser, which is useful for client-side components, for example, date pickers.
 - Made @leafac/html 3.5x faster by changing from [he](https://npm.im/he) [entities](https://npm.im/entities).
+- Switched from custom test runner to Node.js’s test runner.
 
 ### 4.0.0 · 2022-12-02
 
