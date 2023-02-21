@@ -65,7 +65,7 @@ console.log(html`<p>${["Leandro", " ", "Facchinetti"]}</p>`); // => <p>Leandro F
 
 Array interpolation is safe by default; if you wish to unsafely interpolate an array of trusted HTML use `$${[...]}`.
 
-**@leafac/html doesn’t encode HTML itself.** It relies on [he](https://npm.im/he), which is a mature solution and covers all the edge cases.
+**@leafac/html doesn’t encode HTML itself.** It relies on [entities](https://npm.im/entities), which is a mature solution and covers all the edge cases.
 
 **@leafac/html doesn’t format the output.** If you need pretty HTML, you may pass the output of @leafac/html to Prettier.
 
@@ -84,7 +84,7 @@ console.log(name);
 console.log(html`<p>A backspace is invalid in XML: ${`|\b|`}</p>`); // => <p>A backspace is invalid in XML: ||</p>
 ```
 
-**@leafac/html is fast.** Rendering HTML tends to be one of the most expensive computations in a web server, so it must be fast. @leafac/html is approximately 3x faster than `ReactDOMServer.renderToStaticMarkup()` (run the benchmark on your machine with `npm run test:benchmark`).
+**@leafac/html is fast.** Rendering HTML tends to be one of the most expensive computations in a web server, so it must be fast. @leafac/html is more than one order of magnitude faster than `ReactDOMServer.renderToStaticMarkup()`.
 
 ## Related Projects
 
@@ -108,6 +108,11 @@ console.log(html`<p>A backspace is invalid in XML: ${`|\b|`}</p>`); // => <p>A b
   - Have the notion of virtual DOM instead of simple string concatenation.
 
 ## Changelog
+
+### 4.0.1 · 2023-02-21
+
+- Now it’s possible to import @leafac/html in the browser, which is useful for client-side components, for example, date pickers.
+- Made @leafac/html 3.5x faster by changing from [he](https://npm.im/he) [entities](https://npm.im/entities).
 
 ### 4.0.0 · 2022-12-02
 
