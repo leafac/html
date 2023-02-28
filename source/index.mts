@@ -32,7 +32,7 @@ export default function html(
     }
   }
 
-  output += templateStrings[templateStrings.length - 1];
+  output += templateStrings.at(-1);
 
   return output;
 }
